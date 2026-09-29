@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlin.math.sign
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +25,23 @@ class MainActivity : AppCompatActivity() {
         val etName = findViewById<EditText>(R.id.etName)
         val btnSaludar = findViewById<Button>(R.id.btnSaludar)
         val tvResult = findViewById<TextView>(R.id.tvResult)
+        val btnLimpiar = findViewById<Button>(R.id.btnLimpiar)
 
-        Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
 
         btnSaludar.setOnClickListener {
-            val name = etName.text.toString().trim()
+            val name = etName.text.toString()
             if (name.isNotEmpty()) {
                 tvResult.text = "Hola, $name"
+                Toast.makeText(this, "Hola, $name", Toast.LENGTH_SHORT).show()
             } else {
-                tvResult.text = "No te saludo brother"
+                Toast.makeText(this, "Escribe tu nombre", Toast.LENGTH_SHORT).show()
+                tvResult.text = ""
             }
         }
+        btnLimpiar.setOnClickListener {
+            etName.text.clear()
+            tvResult.text = ""
+        }
+
     }
 }
